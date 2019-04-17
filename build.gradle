@@ -16,9 +16,10 @@ repositories {
         url 'http://maven.aliyun.com/nexus/content/groups/public/'
     }
 }
-bootJar {
+final def jar = bootJar {
     mainClassName = 'com.atagotech.qk.QkApplication'
 }
+jar
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
