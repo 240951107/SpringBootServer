@@ -3,6 +3,7 @@ plugins {
     id 'java'
 }
 
+apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.atagotech'
@@ -11,10 +12,17 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+}
+bootJar {
+    mainClassName = 'com.atagotech.qk.QkApplication'
 }
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile ("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
     runtimeOnly 'mysql:mysql-connector-java'
