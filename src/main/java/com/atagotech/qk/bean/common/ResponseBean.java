@@ -10,7 +10,10 @@ public class ResponseBean<T> {
 
     public ResponseBean() {
     }
-
+    public ResponseBean(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 
     public ResponseBean(T t) {
         this(ResponseConfig.Code.SUCCESS, ResponseConfig.MSG.SUCCESS, t);
