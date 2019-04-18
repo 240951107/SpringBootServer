@@ -34,6 +34,12 @@ public class UserController {
         }
     }
 
+    @RequestMapping("showurl")
+    @ResponseBody
+    public ResponseBean showurl(HttpServletRequest request) {
+        return new ResponseBean(ResponseConfig.Code.SUCCESS, ResponseConfig.MSG.SUCCESS, request.getRequestURL());
+    }
+
 
     @RequestMapping("getUser")
     @ResponseBody
