@@ -5,7 +5,6 @@ import com.atagotech.qk.bean.ResponseConfig;
 import com.atagotech.qk.bean.common.ResponseBean;
 import com.atagotech.qk.bean.data.User;
 import com.atagotech.qk.service.impl.UserService;
-import com.atagotech.qk.utils.RequestUtils;
 import com.atagotech.qk.utils.TextUtls;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,10 +14,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("user")
@@ -32,8 +27,12 @@ public class UserController {
         String _username = request.getParameter("username");
         String _password = request.getParameter("password");
         String checkResult = checkParams(_username, _password);
+        Cookie[] cookies = request.getCookies();
 
-        response.addCookie(new Cookie("aa", "bb"));
+        response.addCookie(new Cookie("cookie_key1", "cookie_value1"));
+        response.addCookie(new Cookie("cookie_key2", "cookie_value2"));
+        response.addCookie(new Cookie("cookie_key3", "cookie_value3"));
+
         if (!TextUtls.isEmpty(checkResult)) {
             return new ResponseBean(ResponseConfig.Code.ERROR, checkResult);
         }
@@ -79,7 +78,6 @@ public class UserController {
     }
 
 
-
     @RequestMapping("getUser")
     @ResponseBody
     public ResponseBean getUser(HttpServletRequest request) {
@@ -94,5 +92,11 @@ public class UserController {
 
     }
 
+    @RequestMapping("logout")
+    @ResponseBody
+    public ResponseBean logout(HttpServletResponse response, HttpServletRequest request) {
+
+        return new ResponseBean();
+    }
 
 }
